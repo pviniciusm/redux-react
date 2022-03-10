@@ -1,6 +1,6 @@
 import { Card, Divider, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 import { Counter } from '../../components/Counter';
 import { PropsCounter } from '../../components/PropsCounter';
 
@@ -10,21 +10,30 @@ const counters = [
     // { name: 'Redux state', element: <ReduxCounter /> },
 ];
 
+const MyCard = ({ counter, setCounter }) => {
+    const handleClick = () => {
+        setCounter(counter + 1);
+    };
+
+    return (
+        <React.Fragment>
+            {counter}
+            <button onClick={handleClick}>Add counter</button>
+        </React.Fragment>
+    );
+};
+
 export const CounterPage = () => {
-    // const loginState = useSelector((state) => state.loginReducer);
-    // const dispatch = useDispatch();
+    const [counter, setCounter] = useState(0);
 
-    // const changeLogin = () => {
-    //     dispatch(toggleLogin());
-    // };
-
-    console.log('[Render] CounterPage');
     return (
         <React.Fragment>
             <Box>
                 <Typography variant="h4">Exemplo - Counter</Typography>
             </Box>
             <Divider sx={{ margin: '10px 0' }} />
+
+            <MyCard counter={counter} setCounter={setCounter} />
 
             {counters.map((item, index) => (
                 <Card
